@@ -1,0 +1,19 @@
+PODS:
+  - GNZSlidingSegment (0.1.0)
+
+DEPENDENCIES:
+  - GNZSlidingSegment (from `https://github.com/chrisgonzgonz/GNZSlidingSegment.git`)
+
+EXTERNAL SOURCES:
+  GNZSlidingSegment:
+    :git: https://github.com/chrisgonzgonz/GNZSlidingSegment.git
+
+CHECKOUT OPTIONS:
+  GNZSlidingSegment:
+    :commit: c76c1d2311e4f7af84d0d7bc350922095b8944d0
+    :git: https://github.com/chrisgonzgonz/GNZSlidingSegment.git
+
+SPEC CHECKSUMS:
+  GNZSlidingSegment: 76e937198abbc09d945795c41c3e39b681ad3d1e
+
+COCOAPODS: 0.39.0

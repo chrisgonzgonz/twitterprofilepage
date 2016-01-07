@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "UIImage+ImageEffects.h"
+#import "GNZSegmentedControl.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 {
@@ -29,10 +30,30 @@
 
 @property (strong) NSMutableDictionary* blurredImageCache;
 
+@property (nonatomic) GNZSegmentedControl *gnzControl;
+@property (nonatomic) NSArray *segmentViewControllers;
 
 @end
 
 @implementation ViewController
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    return self.view.frame.size.height - (44+20+44);
+//}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [UIView new];
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+//    UIEdgeInsets tableInsets = _tableView.contentInset;
+//    tableInsets.bottom += self.view.frame.size.height - (44+20+44);
+////    tableInsets.bottom += 2* (_headerHeight+_subHeaderHeight);
+//    _tableView.contentInset = tableInsets;
+    
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -161,9 +182,10 @@
     
     
     // ===== avatar should stick to left with default margin spacing  ========
-    format = @"|-[avatarImageView]";
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:metrics views:views];
-    [self.view addConstraints:constraints];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
+//    format = @"|-[avatarImageView]";
+//    constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:metrics views:views];
+//    [self.view addConstraints:constraints];
     
     
     // === avatar is square
@@ -212,15 +234,35 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 25;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [UITableViewCell new];
-    cell.textLabel.text = [NSString stringWithFormat:@"Item %i", indexPath.row+1];
+    if (indexPath.row == 1) {
+        cell.textLabel.text = nil;
+        return cell;
+    }
+    
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"Item %lu", indexPath.row+1];
     
     return cell;
+}
+
+
+- (GNZSegmentedControl *)gnzControl {
+    if (!_gnzControl) {
+        GNZSegmentedControl *segmentControl = [[GNZSegmentedControl alloc] initWithSegmentCount:3 indicatorStyle:GNZIndicatorStyleDefault options:@{GNZSegmentOptionControlBackgroundColor: [UIColor colorWithRed:244/255.0 green:245/255.0 blue:245/255.0 alpha:1.0], GNZSegmentOptionDefaultSegmentTintColor: [UIColor colorWithRed:166/255.0 green:166/255.0 blue:166/255.0 alpha:1.0], GNZSegmentOptionSelectedSegmentTintColor: [UIColor colorWithRed: 44/255.0 green: 54/255.0 blue: 67/255.0 alpha:1.0], GNZSegmentOptionIndicatorColor: [UIColor orangeColor]}];
+        segmentControl.translatesAutoresizingMaskIntoConstraints = NO;
+        [segmentControl setTitle:@"Segment 1" forSegmentAtIndex:0];
+        [segmentControl setTitle:@"Segment 2" forSegmentAtIndex:1];
+        [segmentControl setTitle:@"Segment 3" forSegmentAtIndex:2];
+//        [self.view addSubview:_gnzControl];
+        _gnzControl = segmentControl;
+    }
+    return _gnzControl;
 }
 
 
@@ -228,35 +270,46 @@
     
     UIView* sectionView = [[UIView alloc] init];
     
-    NSArray* items = @[@"Tweets", @"Photos", @"Favorites"];
-    
-    UISegmentedControl* segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
-    segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
+//    NSArray* items = @[@"Tweets", @"Photos", @"Favorites"];
+//    
+//    UISegmentedControl* segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
+//    segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
     
     
     NSMutableDictionary* views = [NSMutableDictionary new];
     views[@"super"] = self.view;
+    views[@"segment"] = self.gnzControl;
     
-    [sectionView addSubview:segmentedControl];
-    sectionView.backgroundColor = [UIColor whiteColor];
-    
-    
-    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:segmentedControl attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
-    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:segmentedControl attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.0f]];
+    [sectionView addSubview:self.gnzControl];
+//    sectionView.backgroundColor = [UIColor whiteColor];
     
     
-    UIView* separator = [UIView new];
-    separator.translatesAutoresizingMaskIntoConstraints = NO;
-    separator.backgroundColor = [UIColor lightGrayColor];
-    [sectionView addSubview:separator];
-    [sectionView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-0-[separator]-0-|" options:0 metrics:nil views:@{@"separator": separator}]];
-    [sectionView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[separator(0.5)]-0-|" options:0 metrics:nil views:@{@"separator": separator}]];
+    [sectionView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[segment]|" options:0 metrics:nil views:views]];
+    [sectionView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[segment]|" options:0 metrics:nil views:views]];
+//    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:segmentedControl attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
+//    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:segmentedControl attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.0f]];
+    
+    
+//    UIView* separator = [UIView new];
+//    separator.translatesAutoresizingMaskIntoConstraints = NO;
+//    separator.backgroundColor = [UIColor lightGrayColor];
+//    [sectionView addSubview:separator];
+//    [sectionView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-0-[separator]-0-|" options:0 metrics:nil views:@{@"separator": separator}]];
+//    [sectionView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[separator(1)]-0-|" options:0 metrics:nil views:@{@"separator": separator}]];
     
     return sectionView;;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 44;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 1) {
+        return self.view.frame.size.height - (1*44+100+8);
+    }
     return 44;
 }
 

@@ -1,0 +1,547 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		025A01C4A19E873F849755C618E3438E /* UISegmentedControl+GNZCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 554EF8D981D761850FBB291F40098FEB /* UISegmentedControl+GNZCompatibility.m */; };
+		09B2EDF37C2075C7EC3CA6AF0898E55F /* GNZSlidingSegment-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF8B0322C8AEC9C2900917F01FC4DFC /* GNZSlidingSegment-dummy.m */; };
+		465A4DF1EEB12E927C09EE2C89EBEBB2 /* GNZSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E2372F36EB1AFFB5AB382767CA0CE9 /* GNZSegment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4860F8126F3D98809EDC7360F9252821 /* GNZSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CD87053525889FE66864D9A2D4E99F /* GNZSegmentedControl.m */; };
+		5FD10D4DDE47294C16F366D5D1FC7D98 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		68B8F0117CAC4F454D27FE7D7825C16F /* GNZSlidingSegmentView.h in Headers */ = {isa = PBXBuildFile; fileRef = B450D86AA0715657632D174331EA905D /* GNZSlidingSegmentView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691F9AA65ACF8F84A465B04B4ED413AA /* Pods-twitterprofilepage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5992EB2A313A81B4E23029D894820B9D /* Pods-twitterprofilepage-dummy.m */; };
+		7FC21F3ECA0FCB49F29253A715C9A077 /* UISegmentedControl+GNZCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 750A2C6C5F1B495097ADD226FF7D16FB /* UISegmentedControl+GNZCompatibility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9AFF8CAD8CAB652E3D4F4D0F4F189D75 /* GNZSlidingSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A11A0BBD810AAD11F362A0B26246E03 /* GNZSlidingSegmentView.m */; };
+		EB33FCCDC6FD0BC6741EF43D1C8033CC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		F95CB714E3F37FF7FD9534B2FD340F30 /* GNZSegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 48976500CF5032F0A1CA97A208D45792 /* GNZSegmentedControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		60D2315552F7CC670D466FF2FBA9063E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD5DD86195651D12F757D386426BBC2A;
+			remoteInfo = "GNZSlidingSegment-GNZSlidingSegment";
+		};
+		9B290384BF3486A8DAC7A472A4D3565B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 423291BAD1377621362E963ABB42107A;
+			remoteInfo = GNZSlidingSegment;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		266687F3545486302E76B1D42065D984 /* Pods-twitterprofilepage-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-twitterprofilepage-acknowledgements.plist"; sourceTree = "<group>"; };
+		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		48976500CF5032F0A1CA97A208D45792 /* GNZSegmentedControl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GNZSegmentedControl.h; path = Pod/Classes/GNZSegmentedControl.h; sourceTree = "<group>"; };
+		48E2372F36EB1AFFB5AB382767CA0CE9 /* GNZSegment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GNZSegment.h; path = Pod/Classes/GNZSegment.h; sourceTree = "<group>"; };
+		554EF8D981D761850FBB291F40098FEB /* UISegmentedControl+GNZCompatibility.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UISegmentedControl+GNZCompatibility.m"; path = "Pod/Classes/UISegmentedControl+GNZCompatibility.m"; sourceTree = "<group>"; };
+		5992EB2A313A81B4E23029D894820B9D /* Pods-twitterprofilepage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-twitterprofilepage-dummy.m"; sourceTree = "<group>"; };
+		6A558437D8B992BDA406A9CBCD82E48C /* libGNZSlidingSegment.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGNZSlidingSegment.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		730CFA3952330B7A5D549B0D7835F27D /* Pods-twitterprofilepage-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-twitterprofilepage-resources.sh"; sourceTree = "<group>"; };
+		750A2C6C5F1B495097ADD226FF7D16FB /* UISegmentedControl+GNZCompatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UISegmentedControl+GNZCompatibility.h"; path = "Pod/Classes/UISegmentedControl+GNZCompatibility.h"; sourceTree = "<group>"; };
+		7AF8B0322C8AEC9C2900917F01FC4DFC /* GNZSlidingSegment-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GNZSlidingSegment-dummy.m"; sourceTree = "<group>"; };
+		8456298A3419B0E9071D53DFDF2C28F6 /* Pods-twitterprofilepage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-twitterprofilepage.release.xcconfig"; sourceTree = "<group>"; };
+		8FD41B94F63BA18004F4282AEFBF0D87 /* GNZSlidingSegment.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GNZSlidingSegment.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A11A0BBD810AAD11F362A0B26246E03 /* GNZSlidingSegmentView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GNZSlidingSegmentView.m; path = Pod/Classes/GNZSlidingSegmentView.m; sourceTree = "<group>"; };
+		AC77AB7DFB5807547F17809EB723B1E4 /* Pods-twitterprofilepage-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-twitterprofilepage-acknowledgements.markdown"; sourceTree = "<group>"; };
+		B450D86AA0715657632D174331EA905D /* GNZSlidingSegmentView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GNZSlidingSegmentView.h; path = Pod/Classes/GNZSlidingSegmentView.h; sourceTree = "<group>"; };
+		B74FC15998A714F0320C8BBF303978AF /* GNZSlidingSegment.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GNZSlidingSegment.xcconfig; sourceTree = "<group>"; };
+		B8CD87053525889FE66864D9A2D4E99F /* GNZSegmentedControl.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GNZSegmentedControl.m; path = Pod/Classes/GNZSegmentedControl.m; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BC4D511207BAA966D547C936D4176761 /* libPods-twitterprofilepage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-twitterprofilepage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB228D830954ECD5AAE1A94FD5EA7ECD /* GNZSlidingSegment-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GNZSlidingSegment-prefix.pch"; sourceTree = "<group>"; };
+		F27C00AB781B6F325DBAC1CC8628132D /* Pods-twitterprofilepage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-twitterprofilepage.debug.xcconfig"; sourceTree = "<group>"; };
+		F744A610337826377371A488409A4301 /* Pods-twitterprofilepage-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-twitterprofilepage-frameworks.sh"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		114B2FFA52CB66C6039049A989340175 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FD10D4DDE47294C16F366D5D1FC7D98 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45F36CA2B3F3948FDB443C7512F4FB65 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB33FCCDC6FD0BC6741EF43D1C8033CC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E54285B62C670FE0BE3DD56775CFB47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6B693CB789B86AA8DDC205802E2BAA05 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC1514DA030E880EE52E0DD21054122C /* Pods-twitterprofilepage */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		6B6E9A672DB13399AB4867EA5D5ECEE8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8FD41B94F63BA18004F4282AEFBF0D87 /* GNZSlidingSegment.bundle */,
+				6A558437D8B992BDA406A9CBCD82E48C /* libGNZSlidingSegment.a */,
+				BC4D511207BAA966D547C936D4176761 /* libPods-twitterprofilepage.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				BDD7E044229530F7CF95FD939717FFAB /* Pods */,
+				6B6E9A672DB13399AB4867EA5D5ECEE8 /* Products */,
+				6B693CB789B86AA8DDC205802E2BAA05 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		91090AB2293C79D4955F9F3B8E7D11E9 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B74FC15998A714F0320C8BBF303978AF /* GNZSlidingSegment.xcconfig */,
+				7AF8B0322C8AEC9C2900917F01FC4DFC /* GNZSlidingSegment-dummy.m */,
+				EB228D830954ECD5AAE1A94FD5EA7ECD /* GNZSlidingSegment-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/GNZSlidingSegment";
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BDD7E044229530F7CF95FD939717FFAB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D2017BFF06C84A7FA959FC1972B0C00A /* GNZSlidingSegment */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D2017BFF06C84A7FA959FC1972B0C00A /* GNZSlidingSegment */ = {
+			isa = PBXGroup;
+			children = (
+				48E2372F36EB1AFFB5AB382767CA0CE9 /* GNZSegment.h */,
+				48976500CF5032F0A1CA97A208D45792 /* GNZSegmentedControl.h */,
+				B8CD87053525889FE66864D9A2D4E99F /* GNZSegmentedControl.m */,
+				B450D86AA0715657632D174331EA905D /* GNZSlidingSegmentView.h */,
+				9A11A0BBD810AAD11F362A0B26246E03 /* GNZSlidingSegmentView.m */,
+				750A2C6C5F1B495097ADD226FF7D16FB /* UISegmentedControl+GNZCompatibility.h */,
+				554EF8D981D761850FBB291F40098FEB /* UISegmentedControl+GNZCompatibility.m */,
+				91090AB2293C79D4955F9F3B8E7D11E9 /* Support Files */,
+			);
+			path = GNZSlidingSegment;
+			sourceTree = "<group>";
+		};
+		DC1514DA030E880EE52E0DD21054122C /* Pods-twitterprofilepage */ = {
+			isa = PBXGroup;
+			children = (
+				AC77AB7DFB5807547F17809EB723B1E4 /* Pods-twitterprofilepage-acknowledgements.markdown */,
+				266687F3545486302E76B1D42065D984 /* Pods-twitterprofilepage-acknowledgements.plist */,
+				5992EB2A313A81B4E23029D894820B9D /* Pods-twitterprofilepage-dummy.m */,
+				F744A610337826377371A488409A4301 /* Pods-twitterprofilepage-frameworks.sh */,
+				730CFA3952330B7A5D549B0D7835F27D /* Pods-twitterprofilepage-resources.sh */,
+				F27C00AB781B6F325DBAC1CC8628132D /* Pods-twitterprofilepage.debug.xcconfig */,
+				8456298A3419B0E9071D53DFDF2C28F6 /* Pods-twitterprofilepage.release.xcconfig */,
+			);
+			name = "Pods-twitterprofilepage";
+			path = "Target Support Files/Pods-twitterprofilepage";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		194D78560F571844E0161C57693DCF4A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				465A4DF1EEB12E927C09EE2C89EBEBB2 /* GNZSegment.h in Headers */,
+				F95CB714E3F37FF7FD9534B2FD340F30 /* GNZSegmentedControl.h in Headers */,
+				68B8F0117CAC4F454D27FE7D7825C16F /* GNZSlidingSegmentView.h in Headers */,
+				7FC21F3ECA0FCB49F29253A715C9A077 /* UISegmentedControl+GNZCompatibility.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		423291BAD1377621362E963ABB42107A /* GNZSlidingSegment */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7B2046CFE0B123321C60B3A51C1CF66 /* Build configuration list for PBXNativeTarget "GNZSlidingSegment" */;
+			buildPhases = (
+				2C7913DD01758B6F9C5C18A0D6494298 /* Sources */,
+				114B2FFA52CB66C6039049A989340175 /* Frameworks */,
+				194D78560F571844E0161C57693DCF4A /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D3A7DD44B83DC9E263A8FC850BA57EBF /* PBXTargetDependency */,
+			);
+			name = GNZSlidingSegment;
+			productName = GNZSlidingSegment;
+			productReference = 6A558437D8B992BDA406A9CBCD82E48C /* libGNZSlidingSegment.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		781B5A1BA6A89578B22C1895E506264E /* Pods-twitterprofilepage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02D959B980ADAFCEB41DE5DBF8D0A4E8 /* Build configuration list for PBXNativeTarget "Pods-twitterprofilepage" */;
+			buildPhases = (
+				6CBAE40AD161E04A7B248F4043A45D3B /* Sources */,
+				45F36CA2B3F3948FDB443C7512F4FB65 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4915C1E47412377000509FBBC8CF16F1 /* PBXTargetDependency */,
+			);
+			name = "Pods-twitterprofilepage";
+			productName = "Pods-twitterprofilepage";
+			productReference = BC4D511207BAA966D547C936D4176761 /* libPods-twitterprofilepage.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		DD5DD86195651D12F757D386426BBC2A /* GNZSlidingSegment-GNZSlidingSegment */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A222D1B5C90377F93836D3C7056F3D35 /* Build configuration list for PBXNativeTarget "GNZSlidingSegment-GNZSlidingSegment" */;
+			buildPhases = (
+				DAE3A552BD70E2BEB6D9E7816F03778F /* Sources */,
+				8E54285B62C670FE0BE3DD56775CFB47 /* Frameworks */,
+				E86482ACE014158BAFBFEC270CA1B1D1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GNZSlidingSegment-GNZSlidingSegment";
+			productName = "GNZSlidingSegment-GNZSlidingSegment";
+			productReference = 8FD41B94F63BA18004F4282AEFBF0D87 /* GNZSlidingSegment.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 6B6E9A672DB13399AB4867EA5D5ECEE8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				423291BAD1377621362E963ABB42107A /* GNZSlidingSegment */,
+				DD5DD86195651D12F757D386426BBC2A /* GNZSlidingSegment-GNZSlidingSegment */,
+				781B5A1BA6A89578B22C1895E506264E /* Pods-twitterprofilepage */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E86482ACE014158BAFBFEC270CA1B1D1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2C7913DD01758B6F9C5C18A0D6494298 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4860F8126F3D98809EDC7360F9252821 /* GNZSegmentedControl.m in Sources */,
+				09B2EDF37C2075C7EC3CA6AF0898E55F /* GNZSlidingSegment-dummy.m in Sources */,
+				9AFF8CAD8CAB652E3D4F4D0F4F189D75 /* GNZSlidingSegmentView.m in Sources */,
+				025A01C4A19E873F849755C618E3438E /* UISegmentedControl+GNZCompatibility.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CBAE40AD161E04A7B248F4043A45D3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				691F9AA65ACF8F84A465B04B4ED413AA /* Pods-twitterprofilepage-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAE3A552BD70E2BEB6D9E7816F03778F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4915C1E47412377000509FBBC8CF16F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GNZSlidingSegment;
+			target = 423291BAD1377621362E963ABB42107A /* GNZSlidingSegment */;
+			targetProxy = 9B290384BF3486A8DAC7A472A4D3565B /* PBXContainerItemProxy */;
+		};
+		D3A7DD44B83DC9E263A8FC850BA57EBF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "GNZSlidingSegment-GNZSlidingSegment";
+			target = DD5DD86195651D12F757D386426BBC2A /* GNZSlidingSegment-GNZSlidingSegment */;
+			targetProxy = 60D2315552F7CC670D466FF2FBA9063E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		36548701CB91E25E14EBDDC37A851CDF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8456298A3419B0E9071D53DFDF2C28F6 /* Pods-twitterprofilepage.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		3D239D6467D4C5BF406639666B44A3C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B74FC15998A714F0320C8BBF303978AF /* GNZSlidingSegment.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/GNZSlidingSegment/GNZSlidingSegment-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		B827104502E8731030429243BCAEE227 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F27C00AB781B6F325DBAC1CC8628132D /* Pods-twitterprofilepage.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C35B4826FB077570E7BFDFE7DB390685 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B74FC15998A714F0320C8BBF303978AF /* GNZSlidingSegment.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/GNZSlidingSegment/GNZSlidingSegment-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CD3CF8C3108499AB2F19398AE8B4BA4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B74FC15998A714F0320C8BBF303978AF /* GNZSlidingSegment.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = GNZSlidingSegment;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		F4EBB4654F705F34E6389E53487F1DBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B74FC15998A714F0320C8BBF303978AF /* GNZSlidingSegment.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = GNZSlidingSegment;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		FB45FFD90572718D82AB9092B750F0CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		02D959B980ADAFCEB41DE5DBF8D0A4E8 /* Build configuration list for PBXNativeTarget "Pods-twitterprofilepage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B827104502E8731030429243BCAEE227 /* Debug */,
+				36548701CB91E25E14EBDDC37A851CDF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */,
+				FB45FFD90572718D82AB9092B750F0CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A222D1B5C90377F93836D3C7056F3D35 /* Build configuration list for PBXNativeTarget "GNZSlidingSegment-GNZSlidingSegment" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4EBB4654F705F34E6389E53487F1DBF /* Debug */,
+				CD3CF8C3108499AB2F19398AE8B4BA4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7B2046CFE0B123321C60B3A51C1CF66 /* Build configuration list for PBXNativeTarget "GNZSlidingSegment" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C35B4826FB077570E7BFDFE7DB390685 /* Debug */,
+				3D239D6467D4C5BF406639666B44A3C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}
