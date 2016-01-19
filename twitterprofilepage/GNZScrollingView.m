@@ -1,16 +1,15 @@
 //
-//  ViewController.m
+//  GNZScrollingView.m
 //  twitterprofilepage
 //
-//  Created by Valr on 29/12/14.
-//  Copyright (c) 2014 share. All rights reserved.
+//  Created by Chris Gonzales on 1/19/16.
+//  Copyright © 2016 share. All rights reserved.
 //
 
-#import "ViewController.h"
 #import "UIImage+ImageEffects.h"
-#import "GNZSegmentedControl.h"
+#import "GNZScrollingView.h"
 
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface GNZScrollingView () <UITableViewDelegate>
 {
     CGFloat _headerHeight;
     CGFloat _subHeaderHeight;
@@ -19,32 +18,43 @@
     CGFloat _avatarImageCompressedSize;
     BOOL _barIsCollapsed;
     BOOL _barAnimationComplete;
-    NSUInteger _rowCount;
 }
 
-@property (weak) UITableView *tableView;
-@property (weak) UIImageView *imageHeaderView;
-@property (weak) UIVisualEffectView *visualEffectView;
-@property (strong,nonatomic) UIView *customTitleView;
-@property (strong) UIImage *originalBackgroundImage;
-
-@property (strong) NSMutableDictionary* blurredImageCache;
-
-@property (nonatomic) GNZSegmentedControl *gnzControl;
-@property (nonatomic) NSArray *segmentViewControllers;
-@property (nonatomic) UIView *sectionView;
-
+@property (nonatomic) NSString *hashtagName;
+@property (nonatomic) NSString *hashtagMeta;
+@property (nonatomic) NSString *navTitle;
+@property (nonatomic) NSString *navSubtitle;
 @end
+@implementation GNZScrollingView
 
-@implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    return [self initPrivate];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    return [self initPrivate];
+}
+- (instancetype)initPrivate {
+    
+    if (self = [super initWithFrame:CGRectZero]) {
+        
+        
+    }
+    return self;
+    
+}
+
+- (void)configureWithHashtagName:(NSString *)hashtagName hashtagMeta:(NSString *)hashtagMeta navTitle:(NSString *)navTitle andNavSubtitle:(NSString *)navSubtitle {
+    _hashtagName = hashtagName;
+    _hashtagMeta = hashtagMeta;
+    _navTitle = navTitle;
+    _navSubtitle = navSubtitle;
     
     [self configureNavBar];
-    
     _headerHeight = 100.0;
-    _subHeaderHeight = 100.0;
+    _subHeaderHeight = 150.0;
     _avatarImageSize = 70;
     _avatarImageCompressedSize = 44;
     _barIsCollapsed = false;
@@ -53,19 +63,18 @@
     
     UIApplication* sharedApplication = [UIApplication sharedApplication];
     CGFloat kStatusBarHeight = sharedApplication.statusBarFrame.size.height;
-    CGFloat kNavBarHeight =  self.navigationController.navigationBar.frame.size.height;
+    CGFloat kNavBarHeight =  [self.datasource navbarHeight];
     
     _headerSwitchOffset = _headerHeight - /* To compensate  the adjust scroll insets */(kStatusBarHeight + kNavBarHeight)  - kStatusBarHeight - kNavBarHeight;
     
     NSMutableDictionary* views = [NSMutableDictionary new];
-    views[@"super"] = self.view;
+    views[@"super"] = self;
     
     UITableView* tableView = [[UITableView alloc] init];
     tableView.translatesAutoresizingMaskIntoConstraints = NO; //autolayout
-    tableView.delegate = self;
-//    tableView.dataSource = self;
     self.tableView = tableView;
-    [self.view addSubview:tableView];
+    self.tableView.delegate = self;
+    [self addSubview:tableView];
     views[@"tableView"] = tableView;
     
     UIImage* bgImage = [UIImage imageNamed:@"vegetation.jpg"];
@@ -79,17 +88,17 @@
     views[@"headerImageView"] = headerImageView;
     
     /* Not using autolayout for this one, because i don't really have control on how the table view is setting up the items.*/
-    UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width,
+    UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width,
                                                                        _headerHeight - /* To compensate  the adjust scroll insets */(kStatusBarHeight + kNavBarHeight) + _subHeaderHeight)];
     //tableHeaderView.backgroundColor = [UIColor purpleColor];
     [tableHeaderView addSubview:headerImageView];
     
     UIView* subHeaderPart = [self createSubHeaderView];// [[UIView alloc] init];
     subHeaderPart.translatesAutoresizingMaskIntoConstraints = NO; //autolayout
-   // subHeaderPart.backgroundColor  = [UIColor greenColor];
+    // subHeaderPart.backgroundColor  = [UIColor greenColor];
     [tableHeaderView insertSubview:subHeaderPart belowSubview:headerImageView];
     views[@"subHeaderPart"] = subHeaderPart;
-
+    
     
     
     tableView.tableHeaderView = tableHeaderView;
@@ -106,11 +115,11 @@
      * 0 : subHeaderPart
      * 1 : headerImageView
      * 2 : avatarImageView
-    */
+     */
     
     /* This is important, or section header will 'overlaps' the navbar */
-    self.automaticallyAdjustsScrollViewInsets = YES;
-
+    //    self.automaticallyAdjustsScrollViewInsets = YES;
+    
     
     //Now Let's do the layout
     NSArray* constraints;
@@ -128,11 +137,11 @@
     
     format = @"|-0-[tableView]-0-|";
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:metrics views:views];
-    [self.view addConstraints:constraints];
+    [self addConstraints:constraints];
     
     format = @"V:|-0-[tableView]-0-|";
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:metrics views:views];
-    [self.view addConstraints:constraints];
+    [self addConstraints:constraints];
     
     
     
@@ -151,116 +160,55 @@
     
     format = @"V:[headerImageView(>=minHeaderHeight)]-(subHeaderHeight@750)-|";
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:metrics views:views];
-    [self.view addConstraints:constraints];
+    [self addConstraints:constraints];
     
     format = @"V:|-(headerHeight)-[subHeaderPart(subHeaderHeight)]";
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:metrics views:views];
-    [self.view addConstraints:constraints];
+    [self addConstraints:constraints];
     
     // ===== Header image view should stick to top of the 'screen'  ========
-
-    NSLayoutConstraint* magicConstraint = [NSLayoutConstraint constraintWithItem:headerImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0];
-    [self.view addConstraint: magicConstraint];
+    
+    NSLayoutConstraint* magicConstraint = [NSLayoutConstraint constraintWithItem:headerImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0];
+    [self addConstraint: magicConstraint];
     
     
     
     // ===== avatar should stick to left with default margin spacing  ========
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
-//    format = @"|-[avatarImageView]";
-//    constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:metrics views:views];
-//    [self.view addConstraints:constraints];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
+    //    format = @"|-[avatarImageView]";
+    //    constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:metrics views:views];
+    //    [self.view addConstraints:constraints];
     
     
     // === avatar is square
     constraint = [NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:avatarImageView attribute:NSLayoutAttributeHeight multiplier:1.0f constant:0.0];
-    [self.view addConstraint: constraint];
+    [self addConstraint: constraint];
     
     
     // ===== avatar size can be between avatarSize and avatarCompressedSize
     format = @"V:[avatarImageView(<=avatarSize@760,>=avatarCompressedSize@800)]";
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:metrics views:views];
-    [self.view addConstraints:constraints];
+    [self addConstraints:constraints];
     
     
-    constraint = [NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0f constant:(kStatusBarHeight + kNavBarHeight)];
+    constraint = [NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0f constant:(kStatusBarHeight + kNavBarHeight)];
     constraint.priority = 790;
-    [self.view addConstraint: constraint];
+    [self addConstraint: constraint];
     
     
-    constraint = [NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:subHeaderPart attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-50.0];
+    constraint = [NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:subHeaderPart attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-100.0];
     constraint.priority = 801;
-    [self.view addConstraint: constraint];
+    [self addConstraint: constraint];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [self fillBlurredImageCache];
+        [self fillBlurredImageCache];
     });
-    
-    _rowCount = 25;
 }
 
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-    if ([self isViewLoaded] && self.view.window){
-        /*strong ref to this*/
-        _customTitleView = nil;
-    }
-}
-
-- (void)dealloc{
+- (void)dealloc {
     _originalBackgroundImage = nil;
     [_blurredImageCache removeAllObjects];
     _blurredImageCache = nil;
-}
-#pragma mark - Table view data source
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return _rowCount + 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-
-    UITableViewCell *cell = [UITableViewCell new];
-    
-    if (indexPath.row == _rowCount) {
-        return cell;
-    }
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"Item %lu", indexPath.row+1];
-    
-    return cell;
-}
-
-
-- (GNZSegmentedControl *)gnzControl {
-    if (!_gnzControl) {
-        GNZSegmentedControl *segmentControl = [[GNZSegmentedControl alloc] initWithSegmentCount:3 indicatorStyle:GNZIndicatorStyleDefault options:@{GNZSegmentOptionControlBackgroundColor: [UIColor colorWithRed:244/255.0 green:245/255.0 blue:245/255.0 alpha:1.0], GNZSegmentOptionDefaultSegmentTintColor: [UIColor colorWithRed:166/255.0 green:166/255.0 blue:166/255.0 alpha:1.0], GNZSegmentOptionSelectedSegmentTintColor: [UIColor colorWithRed: 44/255.0 green: 54/255.0 blue: 67/255.0 alpha:1.0], GNZSegmentOptionIndicatorColor: [UIColor orangeColor]}];
-        segmentControl.translatesAutoresizingMaskIntoConstraints = NO;
-        [segmentControl setTitle:@"Segment 1" forSegmentAtIndex:0];
-        [segmentControl setTitle:@"Segment 2" forSegmentAtIndex:1];
-        [segmentControl setTitle:@"Segment 3" forSegmentAtIndex:2];
-//        [self.view addSubview:_gnzControl];
-        _gnzControl = segmentControl;
-    }
-    return _gnzControl;
-}
-
-- (void)segmentSelected:(UISegmentedControl *)sender {
-    NSLog(@"segmenet selected");
-    switch (sender.selectedSegmentIndex) {
-        case 1:
-            _rowCount = 2;
-            break;
-        case 2:
-            _rowCount = 30;
-        case 0:
-            _rowCount = 24;
-    }
-    [self.tableView reloadData];
 }
 
 - (UIView *)sectionView {
@@ -271,12 +219,13 @@
         
         UISegmentedControl* segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
         segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
-        [segmentedControl addTarget:self action:@selector(segmentSelected:) forControlEvents:UIControlEventValueChanged];
         segmentedControl.selectedSegmentIndex = 0;
+        [segmentedControl addTarget:self action:@selector(segmentSelected:) forControlEvents:UIControlEventValueChanged];
+        self.segmentedControl = segmentedControl;
         
         
         NSMutableDictionary* views = [NSMutableDictionary new];
-        views[@"super"] = self.view;
+        views[@"super"] = self;
         //    views[@"segment"] = self.gnzControl;
         
         //    [sectionView addSubview:self.gnzControl];
@@ -297,60 +246,38 @@
         [sectionView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-0-[separator]-0-|" options:0 metrics:nil views:@{@"separator": separator}]];
         [sectionView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[separator(1)]-0-|" options:0 metrics:nil views:@{@"separator": separator}]];
         _sectionView = sectionView;
+        [segmentedControl setWidth:100 forSegmentAtIndex:0];
+        [segmentedControl setWidth:100 forSegmentAtIndex:2];
         
     }
     return _sectionView;
-}
-
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    return self.sectionView;
-    
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 44;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGFloat cellHeight = 44;
-    if (indexPath.row == _rowCount) {
-        return MAX(0, self.view.frame.size.height - (cellHeight*_rowCount + _subHeaderHeight + 8));
-    }
-    return cellHeight;
 }
 
 #pragma mark - NavBar configuration
 
 - (void) configureNavBar {
         
-        self.view.backgroundColor = [UIColor blueColor];
+        self.backgroundColor = [UIColor blueColor];
     
-        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-        self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-        
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"dank" style:UIBarButtonItemStyleBordered target:self action:nil];
-    
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:nil];
-        
-        [self switchToExpandedHeader];
-
-    
+//        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//        self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+//        
+//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"dank" style:UIBarButtonItemStyleBordered target:self action:nil];
+//    
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:nil];
+    [self.delegate configureNavBar];
+    [self switchToExpandedHeader];
 }
 
 
 - (void)switchToExpandedHeader
 {
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTranslucent:YES];
-    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.navigationItem.titleView = nil;
-//    if(self.visualEffectView){
-//        [self.visualEffectView removeFromSuperview];
-//        self.visualEffectView = nil;
-//    }
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setTranslucent:YES];
+//    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+//    self.navigationItem.titleView = nil;
+    [self.delegate switchToExpandedHeader];
     
     _barAnimationComplete = false;
     self.imageHeaderView.image = self.originalBackgroundImage;
@@ -363,26 +290,21 @@
 
 - (void)switchToMinifiedHeader
 {
-//    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-//    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-//    visualEffectView.frame = self.imageHeaderView.bounds;
-//    self.visualEffectView = visualEffectView;
-//    [self.imageHeaderView addSubview:visualEffectView];
     
     _barAnimationComplete = false;
     
-    self.navigationItem.titleView = self.customTitleView;
-    self.navigationController.navigationBar.clipsToBounds = YES;
-    
-    //Setting the view transform or changing frame origin has no effect, only this call does
-    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:60 forBarMetrics:UIBarMetricsDefault];
+    [self.delegate switchToMinifiedHeader];
+//    self.navigationItem.titleView = self.customTitleView;
+//    self.navigationController.navigationBar.clipsToBounds = YES;
+//    
+//    //Setting the view transform or changing frame origin has no effect, only this call does
+//    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:60 forBarMetrics:UIBarMetricsDefault];
     
     //[self.navigationItem.titleView updateConstraintsIfNeeded];
     
     //Inverse Z-Order of avatar Image view
     [self.tableView.tableHeaderView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
 }
-
 
 #pragma mark - UIScrollView delegate
 
@@ -400,22 +322,22 @@
     //appologies for the magic numbers
     if(yPos > _headerSwitchOffset +20 && yPos <= _headerSwitchOffset +20 +40){
         CGFloat delta = (40 +20 - (yPos-_headerSwitchOffset));
-        [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:delta forBarMetrics:UIBarMetricsDefault];
+//        [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:delta forBarMetrics:UIBarMetricsDefault];
+        [self.delegate adjustNavTitleForDelta:delta];
        
         self.imageHeaderView.image = [self blurWithImageAt:((60-delta)/60.0)];
 
     }
     if(!_barAnimationComplete && yPos > _headerSwitchOffset +20 +40) {
-        [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:0 forBarMetrics:UIBarMetricsDefault];
+//        [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:0 forBarMetrics:UIBarMetricsDefault];
+        [self.delegate adjustNavTitleForDelta:0];
         self.imageHeaderView.image = [self blurWithImageAt:1.0];
         _barAnimationComplete = true;
     }
     
 }
 
-
 #pragma mark - privates
-
 - (UIImageView*) createAvatarImage {
     UIImageView* avatarView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"avatar.jpg"]];
     avatarView.contentMode = UIViewContentModeScaleToFill;
@@ -432,7 +354,8 @@
     if(!_customTitleView){
         UILabel* myLabel = [UILabel new];
         myLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        myLabel.text = @"My Handle";
+//        myLabel.text = @"My Handle";
+        myLabel.text = self.navTitle;
         myLabel.numberOfLines =1;
         
         [myLabel setTextColor:[UIColor whiteColor]];
@@ -442,7 +365,8 @@
         
         UILabel* smallText = [UILabel new];
         smallText.translatesAutoresizingMaskIntoConstraints = NO;
-        smallText.text = @"2 666 Tweets";
+//        smallText.text = @"2 666 Plays";
+        smallText.text = self.navSubtitle;
         smallText.numberOfLines =1;
         
         [smallText setTextColor:[UIColor whiteColor]];
@@ -472,7 +396,7 @@
     UIView* view = [UIView new];
     
     NSMutableDictionary* views = [NSMutableDictionary new];
-    views[@"super"] = self.view;
+    views[@"super"] = self;
     
     UIButton* followButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     followButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -486,27 +410,45 @@
     
     UILabel* nameLabel = [UILabel new];
     nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    nameLabel.text = @"My Display Name";
+//    nameLabel.text = @"My Display Name";
+    nameLabel.text = self.hashtagName;
     nameLabel.numberOfLines =1;
+    nameLabel.textAlignment = NSTextAlignmentCenter;
     [nameLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];
     views[@"nameLabel"] = nameLabel;
     [view addSubview:nameLabel];
 
+    UILabel* metaLabel = [UILabel new];
+    metaLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//    metaLabel.text = @"Bronx, NY - 1,234 Plays";
+    metaLabel.text = self.hashtagMeta;
+    metaLabel.numberOfLines =1;
+    metaLabel.textAlignment = NSTextAlignmentCenter;
+    [metaLabel setFont:[UIFont systemFontOfSize:14.0f]];
+    [metaLabel setTextColor:[UIColor darkGrayColor]];
+    views[@"metaLabel"] = metaLabel;
+    [view addSubview:metaLabel];
     
     
     NSArray* constraints;
     NSString* format;
     //NSDictionary* metrics;
     
-    format = @"[followButton]-|";
+    [followButton addConstraint:[NSLayoutConstraint constraintWithItem:followButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:180]];
+    [view addConstraint:[NSLayoutConstraint constraintWithItem:followButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
+//    format = @"|-[followButton]-|";
+//    constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:nil views:views];
+//    [view addConstraints:constraints];
+    
+    format = @"|-[nameLabel]-|";
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:nil views:views];
     [view addConstraints:constraints];
     
-    format = @"|-[nameLabel]";
+    format = @"|-[metaLabel]-|";
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:nil views:views];
     [view addConstraints:constraints];
     
-    format = @"V:|-[followButton]";
+    format = @"V:[nameLabel]-2-[metaLabel]-[followButton]";
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:nil views:views];
     [view addConstraints:constraints];
     
@@ -515,6 +457,7 @@
     [view addConstraints:constraints];
     
     
+    view.backgroundColor = [UIColor lightGrayColor];
     return view;
 }
 
@@ -566,6 +509,29 @@
     }
 }
 
+#pragma mark - UITableView Delegate 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return nil;
+    return self.sectionView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0;
+    return 44;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat cellHeight = 44;
+    NSUInteger rowCount = [self.datasource numberOfRows];
+    if (indexPath.row == rowCount) {
+        return MAX(0, self.frame.size.height - (cellHeight*rowCount + _subHeaderHeight + 8));
+    }
+    return cellHeight;
+}
 
 
+- (void)segmentSelected:(UISegmentedControl *)sender {
+    [self.delegate segmentSelected:sender];
+}
 @end
